@@ -14,6 +14,12 @@
 		DF4B01E72C4645A50008C278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF4B01E52C4645A50008C278 /* Main.storyboard */; };
 		DF4B01E92C4645A70008C278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF4B01E82C4645A70008C278 /* Assets.xcassets */; };
 		DF4B01EC2C4645A70008C278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF4B01EA2C4645A70008C278 /* LaunchScreen.storyboard */; };
+		DFBAF2A82C4648DB00DCFDC9 /* ApiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBAF2A72C4648DB00DCFDC9 /* ApiViewController.swift */; };
+		DFBAF2AA2C464A5300DCFDC9 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBAF2A92C464A5300DCFDC9 /* FavoriteViewController.swift */; };
+		DFBAF2AC2C464C8800DCFDC9 /* ApiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFBAF2AB2C464C8800DCFDC9 /* ApiKey.plist */; };
+		DFBAF2B02C464E4000DCFDC9 /* ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBAF2AF2C464E4000DCFDC9 /* ShopCell.swift */; };
+		DFBAF2B22C46540300DCFDC9 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBAF2B12C46540300DCFDC9 /* ApiResponse.swift */; };
+		DFBAF2B42C46580000DCFDC9 /* FavoriteShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBAF2B32C46580000DCFDC9 /* FavoriteShop.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +34,12 @@
 		DF4B01E82C4645A70008C278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF4B01EB2C4645A70008C278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF4B01ED2C4645A70008C278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFBAF2A72C4648DB00DCFDC9 /* ApiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiViewController.swift; sourceTree = "<group>"; };
+		DFBAF2A92C464A5300DCFDC9 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		DFBAF2AB2C464C8800DCFDC9 /* ApiKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKey.plist; sourceTree = "<group>"; };
+		DFBAF2AF2C464E4000DCFDC9 /* ShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCell.swift; sourceTree = "<group>"; };
+		DFBAF2B12C46540300DCFDC9 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		DFBAF2B32C46580000DCFDC9 /* FavoriteShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteShop.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,10 +95,16 @@
 				DF4B01DF2C4645A50008C278 /* AppDelegate.swift */,
 				DF4B01E12C4645A50008C278 /* SceneDelegate.swift */,
 				DF4B01E32C4645A50008C278 /* ViewController.swift */,
+				DFBAF2B32C46580000DCFDC9 /* FavoriteShop.swift */,
+				DFBAF2A92C464A5300DCFDC9 /* FavoriteViewController.swift */,
+				DFBAF2A72C4648DB00DCFDC9 /* ApiViewController.swift */,
+				DFBAF2AF2C464E4000DCFDC9 /* ShopCell.swift */,
 				DF4B01E52C4645A50008C278 /* Main.storyboard */,
+				DFBAF2B12C46540300DCFDC9 /* ApiResponse.swift */,
 				DF4B01E82C4645A70008C278 /* Assets.xcassets */,
 				DF4B01EA2C4645A70008C278 /* LaunchScreen.storyboard */,
 				DF4B01ED2C4645A70008C278 /* Info.plist */,
+				DFBAF2AB2C464C8800DCFDC9 /* ApiKey.plist */,
 			);
 			path = Apiapp;
 			sourceTree = "<group>";
@@ -152,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF4B01EC2C4645A70008C278 /* LaunchScreen.storyboard in Resources */,
+				DFBAF2AC2C464C8800DCFDC9 /* ApiKey.plist in Resources */,
 				DF4B01E92C4645A70008C278 /* Assets.xcassets in Resources */,
 				DF4B01E72C4645A50008C278 /* Main.storyboard in Resources */,
 			);
@@ -207,8 +226,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF4B01E42C4645A50008C278 /* ViewController.swift in Sources */,
+				DFBAF2B02C464E4000DCFDC9 /* ShopCell.swift in Sources */,
 				DF4B01E02C4645A50008C278 /* AppDelegate.swift in Sources */,
+				DFBAF2B22C46540300DCFDC9 /* ApiResponse.swift in Sources */,
 				DF4B01E22C4645A50008C278 /* SceneDelegate.swift in Sources */,
+				DFBAF2A82C4648DB00DCFDC9 /* ApiViewController.swift in Sources */,
+				DFBAF2AA2C464A5300DCFDC9 /* FavoriteViewController.swift in Sources */,
+				DFBAF2B42C46580000DCFDC9 /* FavoriteShop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
