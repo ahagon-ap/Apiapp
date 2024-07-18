@@ -11,6 +11,7 @@ class ShopCell: UITableViewCell {
     
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var shopNameLabel: UILabel!
+    @IBOutlet weak var ShopAddressLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
 
 }

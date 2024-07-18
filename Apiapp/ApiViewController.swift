@@ -1,10 +1,3 @@
-//
-//  ApiViewController.swift
-//  Apiapp
-//
-//  Created by WEBSYSTEM-MAC41 on 2024/07/16.
-//
-
 import UIKit
 import Alamofire        // 追加
 import AlamofireImage   // 追加
@@ -13,6 +6,7 @@ import SafariServices
 
 class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -149,6 +143,7 @@ class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let url = URL(string: shop.logo_image)!
         cell.logoImageView.af.setImage(withURL: url)
         cell.shopNameLabel.text = shop.name
+        cell.ShopAddressLabel.text = shop.address
         // ここから
         let starImageName = shop.isFavorite ? "star.fill" : "star"
         let starImage = UIImage(systemName: starImageName)?.withRenderingMode(.alwaysOriginal)
@@ -182,6 +177,7 @@ class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 let favoriteShop = FavoriteShop()
                 favoriteShop.id = shop.id
                 favoriteShop.name = shop.name
+                favoriteShop.address = shop.address
                 favoriteShop.logoImageURL = shop.logo_image
                 if shop.coupon_urls.sp == "" {
                     favoriteShop.couponURL = shop.coupon_urls.pc
@@ -205,6 +201,14 @@ class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     // 検索文字列が変更されたときに呼び出されるメソッド
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         updateShopArray(searchText: searchText)
+    }
+    
+    @IBAction func topScrollbutton(_ sender: Any) {
+        if !shopArray.isEmpty {
+            // データがある場合の処理（例: 最上部にスクロールする）
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
     }
     
     /*

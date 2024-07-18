@@ -7,6 +7,7 @@ struct ApiResponse: Decodable {
         struct Shop: Decodable {
             var id: String
             var name: String
+            var address: String
             var logo_image: String
             var coupon_urls: CouponUrls
             struct CouponUrls: Decodable {
