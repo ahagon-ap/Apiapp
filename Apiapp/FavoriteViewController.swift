@@ -1,13 +1,6 @@
-//
-//  FavoriteViewController.swift
-//  Apiapp
-//
-//  Created by WEBSYSTEM-MAC41 on 2024/07/16.
-//
-
 import UIKit
-import RealmSwift       // 追加
-import AlamofireImage   // 追加
+import RealmSwift
+import AlamofireImage
 import SafariServices
 
 class FavoriteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -15,22 +8,18 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    let realm = try! Realm()    // 追加
+    let realm = try! Realm()
     
-    var favoriteArray = try! Realm().objects(FavoriteShop.self) // 追加
+    var favoriteArray = try! Realm().objects(FavoriteShop.self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // ここから
         tableView.delegate = self
         tableView.dataSource = self
-        // ここまで追加
 
-        // Do any additional setup after loading the view.
     }
     
-    // ここから
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -58,10 +47,9 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         
         return cell
     }
-    // ここまで追加
     
     @IBAction func tapFavoriteButton(_ sender: UIButton) {
-        // ここから
+
         let point = sender.convert(CGPoint.zero, to: tableView)
         let indexPath = tableView.indexPathForRow(at: point)!
         let favoriteShop = favoriteArray[indexPath.row]
@@ -86,7 +74,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         alert.addAction(cancelAction)
         
         present(alert, animated: true)
-        // ここまで追加
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -98,14 +85,4 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         present(safariViewController, animated: true)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

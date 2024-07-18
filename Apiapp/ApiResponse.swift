@@ -1,4 +1,4 @@
-import RealmSwift   // 追加
+import RealmSwift
 
 struct ApiResponse: Decodable {
     var results: Result
@@ -14,7 +14,6 @@ struct ApiResponse: Decodable {
                 var pc: String
                 var sp: String
             }
-            // ここから
             var isFavorite: Bool {
                 if try! Realm().object(ofType: FavoriteShop.self, forPrimaryKey: self.id) != nil {
                     return true
@@ -22,7 +21,6 @@ struct ApiResponse: Decodable {
                     return false
                 }
             }
-            // ここまで追加
         }
     }
 }

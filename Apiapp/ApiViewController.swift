@@ -1,27 +1,26 @@
 import UIKit
-import Alamofire        // 追加
-import AlamofireImage   // 追加
-import RealmSwift    // 追加
+import Alamofire
+import AlamofireImage
+import RealmSwift
 import SafariServices
 
 class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
+    
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let realm = try! Realm()    // 追加
+    let realm = try! Realm()
     
-    var shopArray: [ApiResponse.Result.Shop] = []   // 追加
-    var apiKey: String = ""                         // 追加
+    var shopArray: [ApiResponse.Result.Shop] = []
+    var apiKey: String = ""
     var isLoading = false
     var isLastLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // ここから
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -30,44 +29,32 @@ class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let plist = NSDictionary(contentsOfFile: filePath!)!
         apiKey = plist["key"] as! String
         
-        // shopArray読み込み
         updateShopArray(searchText: searchBar.text)
-        // ここまで追加
-        // RefreshControlの設定
+        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
-        // ここまで追加
     }
     
-    // ここから
     @objc func refresh() {
-        // shopArray再読み込み
         updateShopArray(searchText: searchBar.text)
     }
-    // Do any additional setup after loading the view.
     
-    // ここから
+    
     func updateShopArray(appendLoad: Bool = false,searchText: String?) {
-        // 現在読み込み中なら読み込みを開始しない
         if isLoading {
             return
         }
-        // 最後まで読み込んでいるなら、追加読み込みしない
         if appendLoad && isLastLoaded {
             return
         }
-        // 読み込み開始位置を設定
         let startIndex: Int
         if appendLoad {
             startIndex = shopArray.count + 1
         } else {
             startIndex = 1
         }
-        // 読み込み中状態開始
         isLoading = true
-        // ここまで追加
-        
         let parameters: [String: Any] = [
             "key": apiKey,
             "start": startIndex,
@@ -75,39 +62,27 @@ class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "keyword": searchText ?? "",
             "format": "json"
         ]
-        print("APIリクエスト 開始位置: \(parameters["start"]!) 読み込み店舗数: \(parameters["count"]!)")    // 追加
         AF.request("https://webservice.recruit.co.jp/hotpepper/gourmet/v1/", method: .get, parameters: parameters).responseDecodable(of: ApiResponse.self) { response in
-            // ここから
-            self.isLoading = false  // 追加
-            // リフレッシュ表示動作停止
+            self.isLoading = false
             if self.tableView.refreshControl!.isRefreshing {
                 self.tableView.refreshControl!.endRefreshing()
             }
-            // ここまで追加
-            // レスポンス受信処理
             switch response.result {
             case .success(let apiResponse):
-                // ここから
-                // print("受信データ: \(apiResponse)")
-                print("受信店舗数: \(apiResponse.results.shop.count)")
                 if appendLoad {
-                    // 追加読み込みの場合は、現在のshopArrayに追加
                     self.shopArray += apiResponse.results.shop
                 } else {
-                    // 追加読み込みでない場合はそのまま代入し、isLastLoadedをリセット
                     self.shopArray = apiResponse.results.shop
                     self.isLastLoaded = false
                 }
-                // 読み込み数が0なら最後まで読み込まれたと判断
                 if apiResponse.results.shop.count == 0 {
                     self.isLastLoaded = true
                 }
-                // ここまで変更
                 self.statusLabel.text = ""
             case .failure(let error):
                 print(error)
                 self.shopArray = []
-                self.isLastLoaded = true    // 追加
+                self.isLastLoaded = true
                 if let searchText = searchText, searchText.isEmpty {
                     self.statusLabel.text = "検索キーワードを入力してください"
                 } else {
@@ -144,17 +119,12 @@ class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.logoImageView.af.setImage(withURL: url)
         cell.shopNameLabel.text = shop.name
         cell.ShopAddressLabel.text = shop.address
-        // ここから
         let starImageName = shop.isFavorite ? "star.fill" : "star"
         let starImage = UIImage(systemName: starImageName)?.withRenderingMode(.alwaysOriginal)
         cell.favoriteButton.setImage(starImage, for: .normal)
-        // ここまで追加
-        // ここから
-        // 追加データの読み込みが必要か確認
         if shopArray.count - indexPath.row < 10 {
             self.updateShopArray(appendLoad: true,searchText: searchBar.text)
         }
-        // ここまで追加
         
         return cell
     }
@@ -188,10 +158,8 @@ class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             }
         }
         tableView.reloadData()
-        // ここまで追加
     }
     
-    // ここから
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -205,20 +173,10 @@ class ApiViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     @IBAction func topScrollbutton(_ sender: Any) {
         if !shopArray.isEmpty {
-            // データがある場合の処理（例: 最上部にスクロールする）
+            // データがある場合の処理（最上部にスクロールする）
             let indexPath = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
